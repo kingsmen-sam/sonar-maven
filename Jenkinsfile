@@ -10,12 +10,12 @@ node {
      }
    }
    stage('SonarScan') {
-     withMaven(jdk: 'JDK-1.8', maven: 'Maven-3.6.1') {
-       withSonarQubeEnv('SonarQube') {
-         sh 'mvn install sonar:sonar'   
-       }
-    }
-  }
+      withSonarQubeEnv('SonarQube') {   
+         withMaven(jdk: 'JDK-1.8', maven: 'Maven-3.6.1') {
+              sh 'mvn install sonar:sonar'   
+         }
+      }
+   }
    stage('Artifacts') {
        echo 'package the project artifacts..'
        withMaven(jdk: 'JDK-1.8', maven: 'Maven-3.6.1') {

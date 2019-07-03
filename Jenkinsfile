@@ -6,13 +6,13 @@ node {
    stage('Build Test & Package') {
       echo 'Build the package'
       withMaven(jdk: 'JDK-1.8', maven: 'Maven-3.6.1') {
-       sh 'mvn clean compile'
+       sh 'mvn clean install'
      }
    }
    stage('SonarScan') {
       withSonarQubeEnv('SonarQube') {   
          withMaven(jdk: 'JDK-1.8', maven: 'Maven-3.6.1') {
-              sh 'mvn install sonar:sonar'   
+              sh 'mvn sonar:sonar'   
          }
       }
    }

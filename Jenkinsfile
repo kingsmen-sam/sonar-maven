@@ -12,7 +12,7 @@ node {
    stage('SonarScan') {
      withMaven(jdk: 'JDK-1.8', maven: 'Maven-3.6.1') {
        withSonarQubeEnv('SonarQube') {
-         sh 'mvn verify sonar:sonar'   
+         sh 'mvn install sonar:sonar'   
        }
     }
   }

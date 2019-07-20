@@ -6,17 +6,18 @@ node {
    stage('Build Test & Package') {
       echo 'Build the package'
       withMaven(jdk: 'JDK-1.8', maven: 'Maven-3.6.1') {
-       sh 'mvn clean compile
+       sh 'mvn clean compile test'
      }
    }
    stage('SonarScan') {
       //withSonarQubeEnv('SonarQube') {
          withMaven(jdk: 'JDK-1.8', maven: 'Maven-3.6.1') {
              //sh 'mvn clean package sonar:sonar' 
-             sh ' mvn org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar ' +
+             sh ' mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.6.0.1398:sonar ' +
              ' -Dsonar.host.url=https://sonarcloud.io ' +
-             ' -Dsonar.organization=itrainavengers '+ 
-             ' -Dsonar.login=c1f3a8036d378aacc1f6e6e2fc6dcd7de2ebae5d '   
+             ' -Dsonar.organization=itrainspartans '+ 
+             ' -Dsonar.login=fe081245dcecb35f616d678b5dc61153533bdb18 ' +
+             ' -Dsonar.links.ci='    
          //}
       }
    }

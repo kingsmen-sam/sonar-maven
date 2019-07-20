@@ -13,7 +13,7 @@ node {
       //withSonarQubeEnv('SonarQube') {
          withMaven(jdk: 'JDK-1.8', maven: 'Maven-3.6.1') {
              //sh 'mvn clean package sonar:sonar' 
-             sh ' mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.6.0.1398:sonar ' +
+             sh 'mvn clean verify sonar:sonar ' +
              ' -Dsonar.host.url=https://sonarcloud.io ' +
              ' -Dsonar.organization=itrainspartans '+ 
              ' -Dsonar.login=fe081245dcecb35f616d678b5dc61153533bdb18 ' +

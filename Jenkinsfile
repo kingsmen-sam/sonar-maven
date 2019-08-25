@@ -4,7 +4,7 @@ node {
      }
    stage('Build Test & Package') {
       echo 'Build the package'
-      withMaven(jdk: 'JDK-1.8', maven: 'Maven-3.6.1') {
+     withMaven(jdk: 'Java', maven: 'Maven') {
        sh 'mvn clean compile test'
      }
    }

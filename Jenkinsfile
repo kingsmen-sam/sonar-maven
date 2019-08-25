@@ -1,7 +1,6 @@
 node {
     stage('Code Checkout') { // for display purposes
-     echo 'Checout Code and clone it inside jenkins workspace.'
-     git 'https://github.com/itrainavengers/sonar-maven.git'
+     checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'git', url: 'https://github.com/kingsmen-sam/sonar-maven.git']]])
      }
    stage('Build Test & Package') {
       echo 'Build the package'
@@ -11,7 +10,7 @@ node {
    }
    stage('SonarScan') {
       //withSonarQubeEnv('SonarQube') {
-         withMaven(jdk: 'JDK-1.8', maven: 'Maven-3.6.1') {
+        withMaven(jdk: 'Java', maven: 'Maven')  {
              //sh 'mvn clean package sonar:sonar' 
              sh 'mvn clean verify sonar:sonar ' +
              ' -Dsonar.host.url=https://sonarcloud.io ' +
@@ -23,7 +22,7 @@ node {
    }
    stage('Artifacts') {
        echo 'package the project artifacts..'
-       withMaven(jdk: 'JDK-1.8', maven: 'Maven-3.6.1') {
+        withMaven(jdk: 'Java', maven: 'Maven')  {
        sh 'mvn package'
      }
    

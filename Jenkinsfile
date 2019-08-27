@@ -9,15 +9,15 @@ node {
      }
    }
    stage('SonarScan') {
-      //withSonarQubeEnv('SonarQube') {
+     withSonarQubeEnv(credentialsId: 'sonartext') {
         withMaven(jdk: 'Java', maven: 'Maven')  {
              //sh 'mvn clean package sonar:sonar' 
              sh 'mvn clean verify sonar:sonar ' +
              ' -Dsonar.host.url=https://sonarcloud.io ' +
              ' -Dsonar.organization=itrainspartans '+ 
-             ' -Dsonar.login=fe081245dcecb35f616d678b5dc61153533bdb18 ' +
+             ' -Dsonar.login=50910de547616f48a0668895141926458a1468e1 ' +
              ' -Dsonar.links.ci='    
-         //}
+         }
       }
    }
    stage('Artifacts') {
